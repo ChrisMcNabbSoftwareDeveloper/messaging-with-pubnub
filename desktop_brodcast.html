@@ -1,0 +1,18 @@
+<html>
+<body>
+<div
+    <span class="important">channel-name</span>=notifications-channel
+    <span class="important">segregate-notifications-by-page</span>=false
+    <span class="important">id</span>=desktop-notifications-config
+></div>
+<div id=pubnub pub-key=demo sub-key=demo></div>
+<script src=http://cdn.pubnub.com/pubnub-3.1.min.js></script>
+<script
+src=<a href="http://www.pubnub.com/static/html5-desktop-notification-broadcasting.js">http://www.pubnub.com/static/html5-desktop-notification-broadcasting.js</a>
+></script>
+
+<span class="comment">// // User is Ready to Receive Desktop Notifications? //</span>
+var allowed_desktop_notifications = PUBNUB.notify.ready();
+
+</body>
+</html>

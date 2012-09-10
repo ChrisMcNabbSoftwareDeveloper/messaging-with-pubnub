@@ -1,0 +1,17 @@
+<span class="comment">// // Send Desktop Notifications using Ruby //</span>
+require 'Pubnub'
+
+publish_key = 'pub-91cb1068-b33c-4a39-9ba5-0b0097dc78e8'
+subscribe_key = 'sub-6dea4ed9-f1f9-11e1-ad37-39ead1f66571'
+secret_key = 'sec-YTkzMjJlOTctMDQxNS00ZDEyLTkyMDItOWMyOWVlNjM5MjVm'
+ssl_on = false
+
+pubnub = Pubnub.new( publish_key, subscribe_key, secret_key, ssl_on )
+info = pubnub.publish({
+    'channel' => 'notifications-channel',
+    'message' => {
+        image => 'image.jpg',
+        title => 'Title Text',
+        body  => 'Content Body Text'
+    }
+})

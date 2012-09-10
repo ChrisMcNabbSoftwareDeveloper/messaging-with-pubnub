@@ -1,0 +1,65 @@
+<p>
+    <button id=broadcast-enable class=broadcast-button>
+        Enable Desktop Notifications
+    </button>
+    <span id=broadcast-ready>Loading...</span>
+</p><p>
+    <button id=broadcast-button class=broadcast-button>
+        Broadcast HTML5 Desktop Notification
+    </button>
+    <input id=broadcast-text value='Hello Everyone!' />
+</p>
+
+<div
+    <span class="important">channel-name</span>=notifications-channel
+    <span
+        class="important">segregate-notifications-by-page</span>=false
+    <span class="important">id</span>=desktop-notifications-config
+></div>
+<div id=pubnub pub-key=demo sub-key=demo></div>
+<script
+src=http://cdn.pubnub.com/pubnub-3.1.min.js></script>
+<script
+src=<a
+href="http://www.pubnub.com/static/html5-desktop-notification-broadcasting.js">http://www.pubnub.com/static/html5-desktop-notification-broadcasting.js</a>
+></script>
+<script>(function(){
+    function update_ready(enabled) {
+        var ready = PUBNUB.$('broadcast-ready');
+
+        if (enabled) {
+            ready.innerHTML = 'Enabled';
+            PUBNUB.attr( ready, 'class', 'broadcast-enabled' );
+        }
+        else {
+            ready.innerHTML = 'Disabled';
+            PUBNUB.attr( ready, 'class', 'broadcast-disabled' );
+        }
+    }
+
+    update_ready(PUBNUB.notify.ready());
+
+    PUBNUB.bind(
+        'mousedown,touchstart',
+        PUBNUB.$('broadcast-button'),
+        function() {
+            return PUBNUB.notify({
+                image :
+                'http://cdn.pubnub.com/assets/pubnub-70x70.png',
+                title : 'PubNub Notification',
+                body  : PUBNUB.$('broadcast-text').value || "empty
+                message"
+            });
+        }
+    );
+
+    PUBNUB.bind(
+        'mousedown,touchstart',
+        PUBNUB.$('broadcast-enable'),
+        function() {
+            PUBNUB.notify.enable(function(){
+                update_ready(PUBNUB.notify.ready());
+            });
+        }
+    );
+})();</script>
